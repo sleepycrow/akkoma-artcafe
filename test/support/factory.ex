@@ -1,5 +1,5 @@
 # Pleroma: A lightweight social networking server
-# Copyright © 2017-2021 Pleroma Authors <https://pleroma.social/>
+# Copyright © 2017-2022 Pleroma Authors <https://pleroma.social/>
 # SPDX-License-Identifier: AGPL-3.0-only
 
 defmodule Pleroma.Factory do
@@ -726,5 +726,19 @@ defmodule Pleroma.Factory do
       name: "test #{sequence(:hashtag_name, & &1)}"
     }
     |> Map.merge(params)
+  end
+
+  # ArtCafe-related factories below -----------------------------------------------------------------------------------
+
+  def album_factory(attrs \\ %{}) do
+    user = attrs[:user] || insert(:user)
+    should_be_public = Map.get(attrs, :is_public, true)
+
+    %Pleroma.Artcafe.Album{
+      title: "bird album",
+      description: "bird bird bird bird bird",
+      is_public: should_be_public,
+      user_id: user.id
+    }
   end
 end
