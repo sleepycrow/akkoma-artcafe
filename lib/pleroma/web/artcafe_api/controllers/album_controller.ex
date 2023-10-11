@@ -6,8 +6,7 @@ defmodule Pleroma.Web.ArtcafeAPI.AlbumController do
   use Pleroma.Web, :controller
 
   import Pleroma.Web.TranslationHelpers
-  import Pleroma.Web.ControllerHelper,
-    only: [try_render: 3, add_link_headers: 2]
+  import Pleroma.Web.ControllerHelper, only: [try_render: 3, add_link_headers: 2]
 
   alias Pleroma.User
   alias Pleroma.Activity
@@ -102,7 +101,7 @@ defmodule Pleroma.Web.ArtcafeAPI.AlbumController do
 
     conn
     |> add_link_headers(items)
-    |> render("content.json", activities: activities, for: reading_user, as: :activity)
+    |> try_render("content.json", activities: activities, for: reading_user, as: :activity)
   end
 
   # POST /api/v1/artcafe/albums/:id/content
